@@ -1,0 +1,8 @@
+{
+  "name": "Đánh Giá Sẵn Sàng AI Cho SME",
+  "description": "Hệ thống đánh giá chuyên sâu mức độ sẵn sàng ứng dụng Trí tuệ Nhân tạo (AI) cho doanh nghiệp vừa và nhỏ Việt Nam, trực tiếp tư vấn bởi Chuyên gia Nguyễn Vũ Huy Hoàng.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
