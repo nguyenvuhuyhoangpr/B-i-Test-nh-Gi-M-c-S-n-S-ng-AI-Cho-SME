@@ -366,19 +366,19 @@ export default function IntroSection({ onStart, lang }: IntroSectionProps) {
           <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col sm:flex-row">
             <div className="w-full sm:w-1/3 bg-slate-100 dark:bg-slate-950 relative min-h-32">
               <img 
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80" 
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" 
                 alt="Strategy Vision" 
                 className="w-full h-full object-cover filter brightness-90 grayscale-[20%]"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-2 left-2 bg-purple-600 text-white font-bold text-xxs px-2 py-1 rounded-lg">STRATEGY</div>
+              <div className="absolute top-2 left-2 bg-purple-600 text-white font-bold text-xxs px-2 py-1 rounded-lg shadow-sm">STRATEGY</div>
             </div>
             <div className="p-6 flex-1 space-y-2">
-              <h4 className="text-base font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
-                <BrainCircuit className="h-4.5 w-4.5 text-purple-500" />
+              <h4 className="text-base sm:text-lg font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
+                <BrainCircuit className="h-5 w-5 text-purple-500" />
                 <span>{ac.strategyCardTitle}</span>
               </h4>
-              <p className="text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-sans">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 {ac.strategyCardDesc}
               </p>
             </div>
@@ -392,14 +392,14 @@ export default function IntroSection({ onStart, lang }: IntroSectionProps) {
                 className="w-full h-full object-cover filter brightness-90 grayscale-[20%]"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-2 left-2 bg-cyan-600 text-white font-bold text-xxs px-2 py-1 rounded-lg">DATA</div>
+              <div className="absolute top-2 left-2 bg-cyan-600 text-white font-bold text-xxs px-2 py-1 rounded-lg shadow-sm">DATA</div>
             </div>
             <div className="p-6 flex-1 space-y-2">
-              <h4 className="text-base font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
-                <Database className="h-4.5 w-4.5 text-cyan-500" />
+              <h4 className="text-base sm:text-lg font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
+                <Database className="h-5 w-5 text-cyan-500" />
                 <span>{ac.dataCardTitle}</span>
               </h4>
-              <p className="text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-sans">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 {ac.dataCardDesc}
               </p>
             </div>
@@ -413,14 +413,14 @@ export default function IntroSection({ onStart, lang }: IntroSectionProps) {
                 className="w-full h-full object-cover filter brightness-90 grayscale-[20%]"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-2 left-2 bg-emerald-600 text-white font-bold text-xxs px-2 py-1 rounded-lg">PEOPLE</div>
+              <div className="absolute top-2 left-2 bg-emerald-600 text-white font-bold text-xxs px-2 py-1 rounded-lg shadow-sm">PEOPLE</div>
             </div>
             <div className="p-6 flex-1 space-y-2">
-              <h4 className="text-base font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
-                <Users className="h-4.5 w-4.5 text-emerald-500" />
+              <h4 className="text-base sm:text-lg font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
+                <Users className="h-5 w-5 text-emerald-500" />
                 <span>{ac.peopleCardTitle}</span>
               </h4>
-              <p className="text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-sans">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 {ac.peopleCardDesc}
               </p>
             </div>
@@ -434,14 +434,14 @@ export default function IntroSection({ onStart, lang }: IntroSectionProps) {
                 className="w-full h-full object-cover filter brightness-90 grayscale-[20%]"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-2 left-2 bg-amber-600 text-white font-bold text-xxs px-2 py-1 rounded-lg">PROCESS</div>
+              <div className="absolute top-2 left-2 bg-amber-600 text-white font-bold text-xxs px-2 py-1 rounded-lg shadow-sm">PROCESS</div>
             </div>
             <div className="p-6 flex-1 space-y-2">
-              <h4 className="text-base font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
-                <Briefcase className="h-4.5 w-4.5 text-amber-500" />
+              <h4 className="text-base sm:text-lg font-bold font-display text-slate-900 dark:text-white flex items-center space-x-2">
+                <Briefcase className="h-5 w-5 text-amber-500" />
                 <span>{ac.processCardTitle}</span>
               </h4>
-              <p className="text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-sans">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 {ac.processCardDesc}
               </p>
             </div>

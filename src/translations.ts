@@ -92,7 +92,7 @@ export interface TranslationSet {
 export const TRANSLATIONS: Record<Lang, TranslationSet> = {
   vi: {
     siteTitle: "SME AI Readiness",
-    subtitle: "Hệ Thống Đánh Giá Sẵn Sàng AI",
+    subtitle: "Hệ thống đánh giá năng lực sẵn sàng AI",
     authorLabel: "Chuyên gia đồng hành",
     authorName: "Nguyễn Vũ Huy Hoàng",
     academicBody: "VIỆN ĐÀO TẠO & CHUYỂN GIAO CÔNG NGHỆ",
@@ -150,10 +150,10 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     levelOptimistic: "TỐI ƯU HÓA (Sẵn sàng hạn chế)",
     levelBreakthrough: "ĐỘT PHÁ (Sẵn sàng toàn diện)",
     radarChartTitle: "Biểu Đồ Năng Lực Sẵn Sàng 4 Trục Lõi",
-    radarChartLabelStrategy: "Ch.Lược",
-    radarChartLabelData: "D.Liệu",
-    radarChartLabelPeople: "Nhân Sự",
-    radarChartLabelProcess: "Q.Trình",
+    radarChartLabelStrategy: "C",
+    radarChartLabelData: "D",
+    radarChartLabelPeople: "N",
+    radarChartLabelProcess: "Q",
     radarChartDesc: "Phần diện tích bôi cyan càng rộng, tỷ lệ sẵn sàng AI toàn diện của SME càng cao.",
 
     // Categories
@@ -167,13 +167,13 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     actionPlansLabel: "Nhóm hành động khuyến nghị ưu tiên:",
 
     levelIncipientDesc: "Doanh nghiệp hiện tại hầu như chưa chuẩn bị gì cho việc tích hợp AI. Quy trình vận hành thủ công rời rạc, dữ liệu số thô sơ và nhân sự chưa tiếp xúc công cụ Prompt thông minh. Ban điều hành cần chuyển đổi chiến lược căn bản và nâng cao nhận thức số trước tiên.",
-    levelSpontaneousDesc: "Công ty đã có một số hoạt động số hóa văn phòng nhỏ lẻ và nhân sự tự sử dụng các công cụ cơ bản thế hệ mới (ChatGPT, v.v.). Tuy nhiên, việc vận dụng hoàn toàn mang tính bộc phát cá nhân, thiếu chiến lược liên thông và nguồn dữ liệu cốt lõi chưa đủ sạch để tự động hóa diện rộng.",
+    levelSpontaneousDesc: "Công ty đã có một số hoạt động số hóa văn phòng nhỏ lẻ và nhân sự tự sử dụng các công cụ AI tạo sinh (ChatGPT, v.v.). Tuy nhiên, việc vận dụng hoàn toàn mang tính bộc phát cá nhân, thiếu chiến lược liên thông và nguồn dữ liệu cốt lõi chưa đủ sạch để tự động hóa diện rộng.",
     levelOptimisticDesc: "Hệ thống quy trình và cơ sở dữ liệu liên phòng ban đã sẵn sàng khá vững vàng. Ban lãnh đạo cam kết đồng hành và nhân sự giàu năng lực tiếp cận đổi mới. Doanh nghiệp hội tụ đủ yếu tố để thí điểm nhanh một số dự án AI nòng cốt giúp tăng tốc năng suất trong 3-6 tháng.",
     levelBreakthroughDesc: "Chúc mừng! Doanh nghiệp sở hữu nền tảng vận hành tự động lý tưởng, dữ liệu cập nhật API liên tục, văn hóa nỗ lực bứt phá công nghệ sâu rộng. Đây là thời cơ vàng để doanh nghiệp nhúng AI trực tiếp làm tài sản cạnh tranh độc quyền toàn diện.",
 
     expertFooterContactLabel: "HOTLINE TƯ VẤN TRỰC TIẾP",
     expertFooterSubtitle: "Chuyên gia đào tạo AI hàng đầu cho doanh nghiệp & lãnh đạo",
-    expertCredential1: "Nhà sáng lập Viện Đào tạo & Chuyển giao công nghệ thế hệ mới.",
+    expertCredential1: "Nhà sáng lập Viện Đào tạo & Chuyển giao công nghệ tiên tiến.",
     expertCredential2: "Đã tư vấn & nâng cấp tư duy Prompt/AI tích hợp cho +2,000 nhân sự các cấp.",
     expertCredential3: "Chuyên gia phát triển ứng dụng AI thực chiến giúp cắt giảm 50% thời gian vận hành.",
     expertCopyright: "Bản quyền công cụ đánh giá và mô hình giải pháp AI toàn diện thuộc về Chuyên gia Nguyễn Vũ Huy Hoàng. Chương trình được thiết kế nhằm hỗ trợ nâng tầm năng lực cạnh tranh bền vững cho cộng đồng SME Việt Nam."
@@ -238,10 +238,10 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     levelOptimistic: "OPTIMISTIC (Conditionally Ready)",
     levelBreakthrough: "BREAKTHROUGH (Completely Empowered)",
     radarChartTitle: "The Balanced 4-Axis Competency Map",
-    radarChartLabelStrategy: "Strategy",
-    radarChartLabelData: "Data",
-    radarChartLabelPeople: "People",
-    radarChartLabelProcess: "Process",
+    radarChartLabelStrategy: "S",
+    radarChartLabelData: "D",
+    radarChartLabelPeople: "P",
+    radarChartLabelProcess: "P",
     radarChartDesc: "The wider the shaded cyan polygon area is, the higher the balanced SME AI readiness index.",
 
     // Categories
@@ -462,15 +462,15 @@ export function getCategoryAnalysis(
   if (category === "strategy") {
     if (score <= 8) {
       return {
-        segmentTitle: isVI ? "NHẬN THỨC SƠ KHỞI - THẤP (Low Strategy Focus)" : "INCIPIENT FOCUS (Low Strategic Focus)",
+        segmentTitle: isVI ? "CHƯA SẴN SÀNG (Chiến lược còn mơ hồ)" : "INCIPIENT FOCUS (Low Strategic Focus)",
         evaluation: isVI
-          ? "Ban điều hành chưa bộc lộ định hướng áp dụng số hoặc chưa nhận thức sâu sắc về rủi ro của kỷ nguyên AI. Doanh nghiệp đang đối mặt nguy cơ mất tính cạnh tranh cao."
+          ? "Hiện tại doanh nghiệp chưa có kế hoạch ứng dụng công nghệ rõ ràng. Nếu không thay đổi sớm, bạn có thể dễ bị tụt hậu so với các đối thủ đang chuyển mình."
           : "Executive leadership exhibits low digital alignment or lacks a deep awareness of AI disruptions. Your firm faces substantial structural risk as peers scale.",
         recommendations: isVI
           ? [
-              "Tập trung nâng cấp kiến thức số qua các nội dung ngắn, trực tuyến miễn phí.",
-              "Vạch ra 01 bài toán gây đau đầu nhất trong bộ phận kinh doanh để thử nghiệm giải quyết trước bằng AI.",
-              "Tham gia các nhóm tư vấn, hội thảo SME của Chuyên gia Nguyễn Vũ Huy Hoàng để cập nhật xu hướng thực tế."
+              "Hãy bắt đầu bằng việc tìm hiểu các khái niệm cơ bản về AI thông qua các cộng đồng doanh nghiệp hoặc nguồn tài liệu mở miễn phí.",
+              "Khuyến khích nhân viên dùng thử ChatGPT hoặc Gemini để viết email, lên ý tưởng nội dung – từ những việc nhỏ nhất.",
+              "Tham khảo chiến lược chuyển đổi số tinh gọn cùng chuyên gia Nguyễn Vũ Huy Hoàng để không bị mất phương hướng."
             ]
           : [
               "Focus on basic digital literacy training for board sponsors via free online materials.",
@@ -480,15 +480,15 @@ export function getCategoryAnalysis(
       };
     } else if (score <= 13) {
       return {
-        segmentTitle: isVI ? "BỘC PHÁT TRUNG BÌNH (Spontaneous Strategic Action)" : "SPONTANEOUS ACTION (Medium Strategic Focus)",
+        segmentTitle: isVI ? "ĐANG TÌM HIỂU (Bắt đầu chú ý đến AI)" : "SPONTANEOUS ACTION (Medium Strategic Focus)",
         evaluation: isVI
-          ? "Ban lãnh đạo đã bắt đầu quan tâm và có thiện chí nhưng việc định biên ngân sách cũng như vạch kế hoạch AI còn rời rạc, chưa thống nhất thành chỉ số đo lường hiệu quả cụ thể."
+          ? "Ban lãnh đạo đã bắt đầu quan tâm tới ứng dụng AI nhưng chưa có ngân sách hay lộ trình nhất quán. Các bước đi vẫn mang tính chất thử nghiệm cá nhân."
           : "Sponsors are aligned and willing, but budget planning, resource mapping, and strategic AI goals remain highly fragmented and lack KPI tracking.",
         recommendations: isVI
           ? [
-              "Chính thức trích xuất một phần nhỏ ngân sách hàng quý dành riêng cho việc chuyển đổi số và nâng tiện ích nhân sự.",
-              "Xây dựng danh mục các đầu việc phù hợp để nhúng AI, tránh ứng dụng ồ ạt không định hướng.",
-              "Đặt mục tiêu giảm thiểu ít nhất 20% chi phí xử lý văn bản hành chính thông qua các giải pháp Prompt chuẩn hóa."
+              "Dành một chút ngân sách nhỏ cho các nhóm kinh doanh để đăng ký trải nghiệm các công cụ AI trả phí như ChatGPT Plus hay Claude Pro.",
+              "Chỉ định một nhân sự yêu thích công nghệ (Tech Lead) làm người hướng dẫn chính cho các phòng ban kỹ năng nhập lệnh (Prompt).",
+              "Bắt tay vào việc số hóa các tài liệu và quy trình nội bộ lên các không gian chung để tạo nền móng vững chắc."
             ]
           : [
               "Formally designate a small, ring-fenced quarterly budget purely for digital tests.",
@@ -498,15 +498,15 @@ export function getCategoryAnalysis(
       };
     } else {
       return {
-        segmentTitle: isVI ? "ĐỊNH HƯỚNG XUẤT SẮC - CAO (Advanced Strategy Vision)" : "ADVANCED VISION (High Strategic focus)",
+        segmentTitle: isVI ? "SẴN SÀNG CAO (Chiến lược rõ nét)" : "ADVANCED VISION (High Strategic focus)",
         evaluation: isVI
-          ? "Tầm nhìn ban lãnh đạo cực kỳ xuất sắc. AI đã được công nhận là một trong 3 cánh tay đắc lực bậc nhất giúp bành trướng doanh thu của doanh nghiệp."
+          ? "Lãnh đạo có tầm nhìn rất xuất sắc. AI được xem như một vũ khí quan trọng để tối ưu hóa và phát triển mạnh mẽ doanh thu."
           : "Excellent executive vision. AI is explicitly targeted as one of the top 3 growth levers to expand corporate profitability in your market segment.",
         recommendations: isVI
           ? [
-              "Thành lập ban chuyên trách AI nội bộ hoặc cử nhân sự nòng cốt làm điều phối viên thúc đẩy đổi mới liên tục.",
-              "Xây dựng Nguyên tắc sử dụng AI An toàn để bảo mật thông tin tối mật của doanh nghiệp.",
-              "Liên hệ Chuyên gia Nguyễn Vũ Huy Hoàng để cố vấn một lộ trình nhúng API AI độc quyền vào lõi kinh doanh sản phẩm."
+              "Nghiên cứu ứng dụng LM Studio để chạy các mô hình AI trực tiếp trên máy chủ công ty, đảm bảo dữ liệu nội bộ được bảo mật tuyệt đối.",
+              "Đẩy mạnh sử dụng nền tảng tạo ứng dụng hoặc website bằng AI (ví dụ: Antigravity) để thử nghiệm các dự án kinh doanh mới cực nhanh.",
+              "Liên hệ Chuyên gia Nguyễn Vũ Huy Hoàng để chuyển sang giai đoạn xây dựng trợ lý AI độc quyền đáp ứng đúng mô hình kinh doanh."
             ]
           : [
               "Appoint a dedicated internal AI champion to maintain high pace of pilot discovery across departments.",
@@ -520,15 +520,15 @@ export function getCategoryAnalysis(
   if (category === "data") {
     if (score <= 8) {
       return {
-        segmentTitle: isVI ? "HẠ TẦNG TRUYỀN THỐNG - THẤP (Analog Data Legacy)" : "ANALOG LEGACY (Low Data Infrastructure)",
+        segmentTitle: isVI ? "DỮ LIỆU PHÂN TÁN (Quản lý còn thủ công)" : "ANALOG LEGACY (Low Data Infrastructure)",
         evaluation: isVI
-          ? "Hồ sơ lưu trữ thủ công hoặc Excel rời rạc khiến việc áp dụng AI gặp khó khăn nghiêm trọng. AI không có dữ liệu chất lượng để học hỏi và xử lý."
+          ? "Công ty quản lý giấy tờ hoặc sổ sách, Excel rời rạc ở nhiều nơi. Điều này khiến việc ứng dụng AI gần như không thể do không có dữ liệu tốt để học."
           : "Scattered spreadsheets or analog procedures create massive friction. No advanced AI agent can deliver high-level value without clean input context.",
         recommendations: isVI
           ? [
-              "Khởi động dự án Số Hóa hồ sơ: Đưa mọi quy trình lưu trữ vật lý lên các nền tảng đám mây trực tuyến.",
-              "Sắp xếp cấu trúc thư mục của công ty theo quy ước thống nhất để chuẩn bị cho việc nạp thông tin sau này.",
-              "Bắt đầu sử dụng Google Drive hoặc Microsoft OneDrive để thiết lập thói quen chia sẻ thư liệu trực tuyến liên thông."
+              "Phải ưu tiên đưa tất cả hồ sơ tài liệu lưu trữ cục bộ lên dữ liệu đám mây chung (ví dụ Google Drive, OneDrive).",
+              "Quy định một cách thức nhất quán để đặt tên tệp và lưu trữ văn bản trong toàn công ty.",
+              "Sử dụng Google Docs, Google Sheets thay thế việc gửi từng tệp Excel qua Zalo hay email."
             ]
           : [
               "Launch a 'Digital First' registry initiative: migrate all physical archives to standard cloud files.",
@@ -538,15 +538,15 @@ export function getCategoryAnalysis(
       };
     } else if (score <= 13) {
       return {
-        segmentTitle: isVI ? "SỐ HÓA BÁN PHẦN - TRUNG BÌNH (Fragmented Cloud Data)" : "FRAGMENTED DATA (Medium Data Infrastructure)",
+        segmentTitle: isVI ? "DỮ LIỆU ĐÁM MÂY (Tập trung trên nền tảng cơ bản)" : "FRAGMENTED DATA (Medium Data Infrastructure)",
         evaluation: isVI
-          ? "Doanh nghiệp đã làm quen với lưu trữ đám mây trực tuyến, nhưng dữ liệu còn phân mảnh lớn giữa các phòng ban và chưa có hệ quy chuẩn làm sạch tự động."
+          ? "Doanh nghiệp đã quen dùng máy chủ trực tuyến, tuy nhiên dữ liệu chưa được làm sạch, đồng bộ và hay trùng lặp."
           : "Your firm is comfortable with general cloud drives, but telemetry remains deeply siloed between teams and lacks routine cleaning procedures.",
         recommendations: isVI
           ? [
-              "Kết nối các tệp dữ liệu cốt lõi (Sales và Marketing) thành một mối lưu trữ chung duy nhất.",
-              "Bắt đầu quy định thời gian quét dọn và chuẩn hóa cơ sở dữ liệu khách hàng theo tháng.",
-              "Sử dụng các cổng kết nối API sẵn có của phần mềm quản trị để đồng tải dữ liệu tự động giữa các bên."
+              "Sử dụng công cụ NotebookLM của Google: Tải tất cả tài liệu cẩm nang nội bộ công ty lên đó để hỏi đáp thông tin nhanh chóng.",
+              "Đồng bộ hóa dữ liệu khách hàng từ khắp mọi nơi về một nơi quản lý khách hàng (CRM) duy nhất.",
+              "Tiến hành định kỳ dọn dẹp và chuẩn hóa lại quy định thu thập thông tin khách hàng."
             ]
           : [
               "Consolidate core sales databases and marketing leads into a unified Customer Relationship Management cloud repository.",
@@ -556,15 +556,15 @@ export function getCategoryAnalysis(
       };
     } else {
       return {
-        segmentTitle: isVI ? "DỮ LIỆU THÔNG SUỐT - CAO (Structured Cloud Ecosystem)" : "CLOUD ECOSYSTEM (High Data Infrastructure)",
+        segmentTitle: isVI ? "DỮ LIỆU HOÀN THIỆN (Mọi tổ chức đã chuẩn hóa số)" : "CLOUD ECOSYSTEM (High Data Infrastructure)",
         evaluation: isVI
-          ? "Hạ tầng dữ liệu số của bạn cực kỳ lý tưởng để sẵn sàng triển khai các dự án AI quy mô lớn hoặc tự động hóa RPA."
+          ? "Dữ liệu được tổ chức cực kỳ bài bản. Bạn đã hoàn toàn sẵn sàng ứng dụng các hệ thống máy học hoặc công cụ tạo sinh tiên tiến nhất."
           : "Exceedingly mature data architecture. Your organization is primed to leverage custom models, automated chains, and autonomous RPA agents immediately.",
         recommendations: isVI
           ? [
-              "Bắt đầu thử nghiệm xây dựng AI Agent hỗ trợ khách hàng thế hệ mới kết nối thẳng với API cơ sở dữ liệu bán hàng nội bộ.",
-              "Mã hóa và kiểm soát kỹ lưỡng phân quyền bảo mật dữ liệu khách hàng theo từng vai trò nhân viên.",
-              "Bắt đầu thiết lập mô hình dự báo thị trường, dự báo tồn kho bằng học máy tự động."
+              "Bắt đầu tích hợp dữ liệu vào Claude hoặc Gemini Advanced thông qua API để tự động tổng hợp báo cáo tài chính hàng ngày.",
+              "Thử nghiệm làm việc cùng các hệ thống Agent tự động hóa cao như Antigravity để xử lý lượng lớn dữ liệu phân tích.",
+              "Phân quyền bảo mật cao tầng và đưa các giải pháp Data Analytics tự động hoá dự báo cung cầu thị trường."
             ]
           : [
               "Experiment with an autonomous customer concierge agent linked directly to your core inventory/sales API endpoints.",
@@ -578,15 +578,15 @@ export function getCategoryAnalysis(
   if (category === "people") {
     if (score <= 8) {
       return {
-        segmentTitle: isVI ? "VĂN HÓA E NGẠI - THẤP (Low Tech Acceptance)" : "E RECOGNITION (Low Culture Readiness)",
+        segmentTitle: isVI ? "E NGẠI THAY ĐỔI (Nhân sự chưa sẵn sàng)" : "E RECOGNITION (Low Culture Readiness)",
         evaluation: isVI
-          ? "Nguồn nhân lực đang có xu hướng phòng thủ, e ngại thay đổi và sợ công nghệ cướp mất cơ hội nghề nghiệp. Đây là rào cản nhân sinh cực kỳ nguy hại."
+          ? "Nhân sự không có thói quen cập nhật công cụ mới, và thậm chí lo lắng việc ứng dụng phần mềm sẽ khiến họ mất việc."
           : "Team displays classic cognitive resistance or fears being replaced by automated intelligence. This is a critical human obstacle to overcome.",
         recommendations: isVI
           ? [
-              "Lãnh đạo cần truyền tải thông điệp truyền cảm hứng: 'AI không thay thế con người, mà người biết dùng AI sẽ thay thế người không biết dùng'.",
-              "Tổ chức các cuộc thi nội bộ vui vẻ về Prompt sáng tạo để xóa tan sợ hãi đối với công nghệ mới.",
-              "Tài trợ 100% tài khoản ChatGPT Plus hay Claude Pro cho các nhân sự đam mê thử nghiệm tiên phong."
+              "Động viên nhân viên bằng thông điệp xuyên suốt: 'AI là một người trợ lý đắc lực, sẽ giúp bạn giảm thiểu những việc lặp đi lặp lại mệt mỏi.'",
+              "Khuyến khích nhân viên dùng trợ lý ảo như Gemini hay ChatGPT bản miễn phí để tìm kiếm thông tin nhanh chóng.",
+              "Tạo các buổi học chia sẻ kỹ năng đơn giản vào cuối tuần cho nhân sự."
             ]
           : [
               "Leadership must emphasize clear, positive narratives: 'AI will not replace humans; rather, humans using AI will replace those who do not.'",
@@ -596,15 +596,15 @@ export function getCategoryAnalysis(
       };
     } else if (score <= 13) {
       return {
-        segmentTitle: isVI ? "TỰ CHỦ RỜI RẠC - TRUNG BÌNH (Spontaneous Prompt Literacy)" : "SPONTANEOUS LITERACY (Medium Culture Readiness)",
+        segmentTitle: isVI ? "ĐÃ CÓ Ý THỨC (Đang tự mày mò)" : "SPONTANEOUS LITERACY (Medium Culture Readiness)",
         evaluation: isVI
-          ? "Nhiều cá nhân tự mò mẫm học Prompt nhưng chưa có chương trình chia sẻ tập thể hay đào tạo hệ thống để nhân rộng hiệu suất vượt bậc cho cả doanh nghiệp."
+          ? "Rất nhiều người rải rác đã chủ động sài các ứng dụng trợ lý ảo nhưng chưa biết cách làm hiệu quả, dẫn đến năng suất chưa bật lên rõ rệt."
           : "Multiple self-driven talents are using basic generative shortcuts, but no central knowledge-sharing structure exist to multiply these efficiency gains team-wide.",
         recommendations: isVI
           ? [
-              "Tạo một kênh thông tin nội bộ (#ai-sharing) trực tuyến để nhân sự chia sẻ trực tiếp các câu lệnh (prompts) hiệu quả cho nhau hàng tuần.",
-              "Xây dựng thư viện Prompt chuyên nghiệp dành riêng cho từng vị trí nghiệp vụ trong công ty.",
-              "Tổ chức khóa huấn luyện ngắn chuyên nghiệp để đồng bộ hóa kỹ năng Prompt cơ bản cho toàn bộ đội ngũ."
+              "Tạo nhóm chat nội bộ (Zalo, Teams) dành riêng cho sáng kiến AI để nhân sự lan tỏa những mẫu câu lệnh hay (prompt).",
+              "Trang bị kỹ năng lập câu lệnh cho Claude (công cụ rất giỏi phân tích văn bản) để nâng cao chất lượng báo cáo nội bộ.",
+              "Xây dựng sổ tay 'Hướng dẫn viết lệnh Prompt' trong công ty với 100 câu lệnh xuất sắc nhất được lưu hành."
             ]
           : [
               "Settle a central chat channel (e.g., #ai-best-practices) for employees to showcase their custom prompt recipes.",
@@ -614,15 +614,15 @@ export function getCategoryAnalysis(
       };
     } else {
       return {
-        segmentTitle: isVI ? "ĐỘI NGŨ CHỦ ĐỘNG - CAO (Self-Driven AI Culture)" : "AI LEADER CULTURE (High Culture Readiness)",
+        segmentTitle: isVI ? "ĐỘI NGŨ TIÊN PHONG (Nhân sự năng lực cao)" : "AI LEADER Culture (High Culture Readiness)",
         evaluation: isVI
-          ? "Văn hóa đổi mới công nghệ vô cùng tuyệt vời. Nhân sự chủ động, xem AI như người đồng nghiệp tri kỷ và sục sôi trải nghiệm cái mới."
+          ? "Đội ngũ vô cùng nhiệt huyết, sáng tạo và luôn tìm kiếm sự hỗ trợ công nghệ để xử lý công việc. Đáng để khen thưởng."
           : "Stellar pro-innovation engineering culture. Employees actively approach challenges with cognitive tools and embrace software upgrades with open arms.",
         recommendations: isVI
           ? [
-              "Khuyến khích nhân sự tự động hóa các tác vụ lặp của họ bằng các nền tảng No-code.",
-              "Thành lập quỹ phát kiến đổi mới số định kỳ hàng quý để trao giải cho các quy trình AI xuất sắc do nhân sự đề xuất.",
-              "Huấn luyện nâng cao về tư duy logic giải quyết bài toán lớn, kỹ năng lập trình bổ trợ."
+              "Trang bị công cụ mô hình sức mạnh mới mẻ cục bộ như LM Studio để đội ngũ phát triển sản phẩm thoải mái làm r&d ý tưởng riêng.",
+              "Đầu tư hẳn các tài khoản Pro chính hang (như ChatGPT Plus hay Claude Pro) cho những nhân viên tận tụy tạo ra kết quả ấn tượng.",
+              "Trao thưởng hàng tháng cho bất kỳ nhân sự nào đề xuất được dòng quy trình tiết kiệm thời gian vận hành bằng AI."
             ]
           : [
               "Instruct your teams to officially build automated self-service agents via friendly no-code builders.",
@@ -636,15 +636,15 @@ export function getCategoryAnalysis(
   // category === "process"
   if (score <= 8) {
     return {
-      segmentTitle: isVI ? "QUY TRÌNH THỦ CÔNG - THẤP (High-Friction Manual Flow)" : "MANUAL FLOW (Low Process Automation)",
+      segmentTitle: isVI ? "HOẠT ĐỘNG THỦ CÔNG CHIẾM TRỌN THỜI GIAN" : "MANUAL FLOW (Low Process Automation)",
       evaluation: isVI
-        ? "Mọi luồng công tác lặp đi lặp lại hoàn toàn thủ công. Sự rườm rà này làm triệt tiêu thời gian sáng tạo chiến lược của nhân sự."
+        ? "Mọi thứ đều xử lý theo cách thức thủ công. Không có hệ thống hay phần mềm hỗ trợ nào hiện diện trong cách làm việc."
         : "Operational workflows are riddled with manual routing, approvals, and physical sign-offs, completely exhausting staff cognitive energy.",
       recommendations: isVI
         ? [
-            "Vẽ lại chi tiết sơ đồ công việc hàng ngày của doanh nghiệp để xác định 3 mắt xích lặp đi lặp lại tốn thời gian nhất.",
-            "Tích hợp các chatbot hỗ trợ trực tuyến đơn giản có sẵn vào Fanpage, Website để lọc yêu cầu cơ bản của khách hàng.",
-            "Chuẩn hóa kịch bản bán hàng và email chăm sóc thành các khối nội dung sẵn sàng cung cấp dữ liệu đầu nạp cho các thế hệ Prompt."
+            "Viết ra giấy hoặc bảng 3 công việc mà nhân sự cảm thấy tốn thời gian, lặp đi lặp lại nhiều nhất.",
+            "Tập sử dụng Zalo OA hoặc thiết lập tự động hóa cơ bản trả lời fanpage Facebook cho các khách hàng.",
+            "Soạn ra một tệp các câu trả lời khách hàng phổ biến, cập nhật file này cho toàn công ty dùng chung."
           ]
         : [
             "Document a granular flowchart of daily workflows to isolate the 3 most redundant time-consuming steps.",
@@ -654,15 +654,15 @@ export function getCategoryAnalysis(
     };
   } else if (score <= 13) {
     return {
-      segmentTitle: isVI ? "TỰ ĐỘNG KHU VỰC - TRUNG BÌNH (Partial Automated Workflows)" : "PARTIAL AUTOMATION (Medium Process Automation)",
+      segmentTitle: isVI ? "TỰ ĐỘNG HÓA KẾT NỐI TỪNG PHẦN" : "PARTIAL AUTOMATION (Medium Process Automation)",
       evaluation: isVI
-        ? "Doanh nghiệp đã chuyển đổi quy trình tốt trên các nền tảng quản trị dự án, nhưng các luồng việc chưa tự động hóa liên thông hoàn toàn."
+        ? "Công ty đã dùng ứng dụng công sở hiện đại và quản lý được tác vụ nhưng chưa xâu chuỗi thông tin giữa các phần mềm trôi chảy."
         : "Your organization uses structured project management spaces, but workflows are not interconnected or fully automated through API actions.",
       recommendations: isVI
         ? [
-            "Bắt đầu sử dụng Zapier hoặc Make để kết nối tự động luồng việc (Ví dụ: Khách điền Form -> Có thông báo về Chat -> Tự gửi Mail chào).",
-            "Tích hợp các plugin AI xử lý thông tin trực tiếp vào phần mềm quản lý công việc để tự động tóm tắt biên bản các buổi họp nội bộ.",
-            "Thử nghiệm chatbot tư vấn sản phẩm nội bộ phục vụ cho chính nhân sự kinh doanh tra cứu kiến thức sản phẩm."
+            "Hãy làm quen với ứng dụng NotebookLM, đưa hàng tá tài liệu hợp đồng lên đó để bộ phận pháp lý/Sale hỏi đáp tức thì.",
+            "Áp dụng kết nối tự động (Zapier/Make) như: Có khách điền form google -> Gắn ngay lên bảng theo dõi Trello/Kizeo.",
+            "Trao đổi kỹ năng tạo bảng kế hoạch, kịch bản marketing hàng loạt với Gemini Advanced hoặc Claude 3.5."
           ]
         : [
             "Deploy low-code triggers using Make or Zapier to connect tools (e.g. Lead Form -> Notification -> Automated Email response).",
@@ -672,15 +672,15 @@ export function getCategoryAnalysis(
     };
   } else {
     return {
-      segmentTitle: isVI ? "ĐỘT PHÁ TỰ ĐỘNG - CAO (Hyper-Automated Ecosystem)" : "HYPER-AUTOMATED (High Process Automation)",
+      segmentTitle: isVI ? "ĐỘT PHÁ VẬN HÀNH BẰNG AI HOÀN CHỈNH" : "HYPER-AUTOMATED (High Process Automation)",
       evaluation: isVI
-        ? "Quy trình vận hành cực kỳ trơn tru, liền mạch kỹ thuật số cao. Bạn đang nắm giữ cơ hội vàng kiến tạo mô hình Autonomous Agent bứt tốc tăng trưởng."
+        ? "Quá tuyệt vời! Bộ máy vận hành đã cực kỳ thông suốt. Bạn có đủ năng lực tự tạo ra Trợ Lý thông minh riêng của doanh nghiệp."
         : "Outstanding structural agility. Workflows are digitized and accessible, making your firm prime for a hyper-automated, agent-driven scaling ecosystem.",
       recommendations: isVI
         ? [
-            "Xây dựng hệ thống tự phục vụ của khách hàng (AI Support) thông qua mô hình trò chuyện đa phương thức tự động giải phóng 80% hotline.",
-            "Kết nối phân tích báo cáo tự động cập nhật liên tục thông qua API gửi báo cáo tình hình tài chính tới lãnh đạo hàng ngày.",
-            "Chia sẻ mô hình tự động hóa thành công đầu tiên này như một điển cứu cạnh tranh bứt phá tuyển dụng nhân tài lớn."
+            "Phân tích hệ thống và kiến tạo các trải nghiệm ứng dụng Web tinh gọn thông qua nền tảng tạo phần mềm Antigravity.",
+            "Hoàn thiện hệ sinh thái AI độc quyền (Local model chạy trên LM Studio) để giữ bí mật quy trình lõi công ty một cách tự trị.",
+            "Áp dụng tạo sinh nội dung hàng loạt, chạy chiến dịch marketing diện rộng như một con người thực sự, cắt bỏ 60% chi phí vận hành quảng cáo."
           ]
         : [
             "Design a multi-modal client-facing support desk (AI assistant) to answer 80% of routine technical requests autonomously.",
