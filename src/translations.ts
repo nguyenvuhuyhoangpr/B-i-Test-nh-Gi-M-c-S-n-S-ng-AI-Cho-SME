@@ -87,6 +87,28 @@ export interface TranslationSet {
   expertCredential2: string;
   expertCredential3: string;
   expertCopyright: string;
+
+  // New section 2 info
+  formHeader: string;
+  formSub: string;
+  formDesc: string;
+  formLabelName: string;
+  formPlaceholderName: string;
+  formLabelPhone: string;
+  formPlaceholderPhone: string;
+  formLabelEmail: string;
+  formPlaceholderEmail: string;
+  formLabelCompany: string;
+  formPlaceholderCompany: string;
+  formLabelPosition: string;
+  formPlaceholderPosition: string;
+  formLabelIndustry: string;
+  formPlaceholderIndustry: string;
+  formRequiredError: string;
+  formInvalidEmail: string;
+  formInvalidPhone: string;
+  btnStartSurvey: string;
+  btnBackIntro: string;
 }
 
 export const TRANSLATIONS: Record<Lang, TranslationSet> = {
@@ -118,8 +140,8 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     whyReason4: "Xác định đúng các phòng ban vận hành nặng tính thủ công để ưu tiên tích hợp AI giảm chi phí trước mắt.",
     usersJoinedStat: "Đã có +340 SME Việt Nam tham gia đánh giá năng lực AI.",
     roadmapHeader: "Hành Trình Đánh Giá Mức Độ Sẵn Sàng AI",
-    roadmapStep1Title: "1. Khởi động nhanh",
-    roadmapStep1Desc: "Bỏ qua các bước đăng ký thông tin phức tạp để đi trực tiếp vào cốt lõi bốc tách vấn đề.",
+    roadmapStep1Title: "1. Thông tin liên hệ",
+    roadmapStep1Desc: "Nhập thông tin cơ bản để cá nhân hóa báo cáo tư vấn và tự động đồng bộ.",
     roadmapStep2Title: "2. Khảo sát 16 câu hỏi",
     roadmapStep2Desc: "Mất 5-7 phút lựa chọn trạng thái thực tế doanh nghiệp trên 4 trục năng lực chính.",
     roadmapStep3Title: "3. Nhận ngay báo cáo",
@@ -176,7 +198,29 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     expertCredential1: "Nhà sáng lập Viện Đào tạo & Chuyển giao công nghệ tiên tiến.",
     expertCredential2: "Đã tư vấn & nâng cấp tư duy Prompt/AI tích hợp cho +2,000 nhân sự các cấp.",
     expertCredential3: "Chuyên gia phát triển ứng dụng AI thực chiến giúp cắt giảm 50% thời gian vận hành.",
-    expertCopyright: "Bản quyền công cụ đánh giá và mô hình giải pháp AI toàn diện thuộc về Chuyên gia Nguyễn Vũ Huy Hoàng. Chương trình được thiết kế nhằm hỗ trợ nâng tầm năng lực cạnh tranh bền vững cho cộng đồng SME Việt Nam."
+    expertCopyright: "Bản quyền công cụ đánh giá và mô hình giải pháp AI toàn diện thuộc về Chuyên gia Nguyễn Vũ Huy Hoàng. Chương trình được thiết kế nhằm hỗ trợ nâng tầm năng lực cạnh tranh bền vững cho cộng đồng SME Việt Nam.",
+
+    // New section 2 info
+    formHeader: "Thông Tin Doanh Nghiệp & Người Khảo Sát",
+    formSub: "BƯỚC 2: CÁ NHÂN HÓA BÁO CÁO TƯ VẤN",
+    formDesc: "Vui lòng hoàn thành các thông tin cơ bản dưới đây. Dữ liệu này giúp chuyên gia Nguyễn Vũ Huy Hoàng đồng bộ kết quả khảo sát và kết nối tự động bản báo cáo của riêng doanh nghiệp bạn vào hệ thống.",
+    formLabelName: "Họ và tên người khảo sát",
+    formPlaceholderName: "Ví dụ: Nguyễn Văn A",
+    formLabelPhone: "Số điện thoại di động (Zalo nhận báo cáo)",
+    formPlaceholderPhone: "Ví dụ: 0912345678",
+    formLabelEmail: "Địa chỉ Email doanh nghiệp",
+    formPlaceholderEmail: "Ví dụ: van.a@congty.com",
+    formLabelCompany: "Tên doanh nghiệp / Công ty",
+    formPlaceholderCompany: "Ví dụ: Công ty TNHH Giải pháp Công nghệ Việt",
+    formLabelPosition: "Chức vụ / Chức danh của bạn",
+    formPlaceholderPosition: "Ví dụ: Giám đốc điều hành, Trưởng phòng Kinh doanh",
+    formLabelIndustry: "Lĩnh vực hoạt động / Ngành nghề",
+    formPlaceholderIndustry: "Ví dụ: Bán lẻ, Sản xuất, Giáo dục, Logistics",
+    formRequiredError: "Trường thông tin này là bắt buộc!",
+    formInvalidEmail: "Địa chỉ email không hợp lệ (ví dụ: name@company.com)!",
+    formInvalidPhone: "Số điện thoại không hợp lệ (yêu cầu từ 9 - 11 chữ số)!",
+    btnStartSurvey: "Tiến Hành Làm Bài Khảo Sát",
+    btnBackIntro: "Quay lại trang chính"
   },
   en: {
     siteTitle: "SME AI Readiness",
@@ -206,8 +250,8 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     whyReason4: "Surgical target processes currently bogged down manually to integrate immediate cost-reducing copilots.",
     usersJoinedStat: "Over 340+ Vietnamese SMEs have benchmarked their capabilities.",
     roadmapHeader: "The Assessment Roadmap Journey",
-    roadmapStep1Title: "1. Instant Start",
-    roadmapStep1Desc: "Bypass complicated registration setups and deep-dive right into the capability questions.",
+    roadmapStep1Title: "1. Business Info",
+    roadmapStep1Desc: "Provide basic company info to personalize the diagnostic report and auto-sync.",
     roadmapStep2Title: "2. 16 Core Questions",
     roadmapStep2Desc: "Spend 5-7 minutes evaluating the business reality across 4 essential development pillars.",
     roadmapStep3Title: "3. Interactive Results",
@@ -264,7 +308,29 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     expertCredential1: "Founder of the modern Institute of Digital Education & Technology Transfer.",
     expertCredential2: "Trained and mentored over 2,000 corporate staff & high-level decision makers in Prompt Engineering and AI.",
     expertCredential3: "Designer of custom generative work environments, saving enterprises and teams up to 50% manual hours.",
-    expertCopyright: "All assessment methodologies, core competency indexes, and advisory reports are copyrighted by Trainer Nguyen Vu Huy Hoang. This program is created to boost the sustainable advantage of SMEs."
+    expertCopyright: "All assessment methodologies, core competency indexes, and advisory reports are copyrighted by Trainer Nguyen Vu Huy Hoang. This program is created to boost the sustainable advantage of SMEs.",
+
+    // New section 2 info
+    formHeader: "Business & Participant Profile",
+    formSub: "STEP 2: PERSONALIZE YOUR ADVISORY REPORT",
+    formDesc: "Please fill in the basic details below. This data enables Expert Nguyen Vu Huy Hoang to automatically synchronize and link your custom AI readiness dashboard directly into the Google Sheet catalog.",
+    formLabelName: "Your Full Name",
+    formPlaceholderName: "e.g., John Doe",
+    formLabelPhone: "Mobile Phone (For direct report delivery)",
+    formPlaceholderPhone: "e.g., +84 912345678",
+    formLabelEmail: "Corporate Email Address",
+    formPlaceholderEmail: "e.g., john.doe@company.com",
+    formLabelCompany: "Enterprise / Company Name",
+    formPlaceholderCompany: "e.g., Viet Tech Solutions Ltd.",
+    formLabelPosition: "Your Job Title / Position",
+    formPlaceholderPosition: "e.g., Chief Executive Officer, Sales Director",
+    formLabelIndustry: "Operational Sector / Industry",
+    formPlaceholderIndustry: "e.g., Retail, Manufacturing, Education, Logistics",
+    formRequiredError: "This field is required!",
+    formInvalidEmail: "Invalid email address structure (e.g., name@company.com)!",
+    formInvalidPhone: "Invalid phone number (9-11 digits required)!",
+    btnStartSurvey: "Continue to Assessment Questions",
+    btnBackIntro: "Back to Home Page"
   }
 };
 

@@ -3,7 +3,6 @@ export interface UserInfo {
   company: string;
   position: string;
   email: string;
-  industry: string;
 }
 
 export type CategoryKey = "strategy" | "data" | "people" | "process";

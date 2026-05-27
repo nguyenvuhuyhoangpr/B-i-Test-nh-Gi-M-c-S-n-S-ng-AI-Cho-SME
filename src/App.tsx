@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { TRANSLATIONS, Lang } from "./translations";
 import IntroSection from "./components/IntroSection";
+import UserInfoSection from "./components/UserInfoSection";
 import Questionnaire from "./components/Questionnaire";
 import ResultSection from "./components/ResultSection";
 import Footer from "./components/Footer";
 import { BrainCircuit, GraduationCap, Sun, Moon, Languages } from "lucide-react";
+import { UserInfo } from "./types";
 
 export default function App() {
-  const [screen, setScreen] = useState<"intro" | "test" | "results">("intro");
+  const [screen, setScreen] = useState<"intro" | "userInfo" | "test" | "results">("intro");
   const [lang, setLang] = useState<Lang>(() => {
     try {
       return (localStorage.getItem("sme-ai-lang") as Lang) || "vi";
@@ -21,6 +23,16 @@ export default function App() {
       return (localStorage.getItem("sme-ai-theme") as "light" | "dark") || "dark";
     } catch {
       return "dark";
+    }
+  });
+
+  // User Profile Lead Information
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(() => {
+    try {
+      const stored = localStorage.getItem("sme-ai-user-info");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
     }
   });
 
@@ -44,7 +56,12 @@ export default function App() {
   }, [theme]);
 
   const handleStartTest = () => {
-    setScreen("test");
+    setScreen("userInfo"); // Screen 2: User profile form before questionnaire
+  };
+
+  const handleUserInfoSubmit = (info: UserInfo) => {
+    setUserInfo(info);
+    setScreen("test"); // Screen 3: Start 16 capability questions
   };
 
   const handleSelectAnswer = (qId: number, score: number) => {
@@ -138,6 +155,14 @@ export default function App() {
         {screen === "intro" && (
           <IntroSection onStart={handleStartTest} lang={lang} />
         )}
+
+        {screen === "userInfo" && (
+          <UserInfoSection
+            lang={lang}
+            onNext={handleUserInfoSubmit}
+            onBack={handleReset}
+          />
+        )}
         
         {screen === "test" && (
           <Questionnaire 
@@ -152,6 +177,7 @@ export default function App() {
         {screen === "results" && (
           <ResultSection 
             answers={answers} 
+            userInfo={userInfo}
             onReset={handleReset} 
             lang={lang}
           />

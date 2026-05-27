@@ -1,5 +1,5 @@
-import React from "react";
-import { CategoryKey } from "../types";
+import React, { useState, useEffect } from "react";
+import { CategoryKey, UserInfo } from "../types";
 import { CATEGORIES } from "../data";
 import { TRANSLATIONS, getCategoryAnalysis, Lang } from "../translations";
 import { 
@@ -15,17 +15,22 @@ import {
   Star,
   Sparkles,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  Check,
+  AlertTriangle,
+  Loader2,
+  FileSpreadsheet
 } from "lucide-react";
 import { motion } from "motion/react";
 
 interface ResultSectionProps {
   answers: Record<number, number>; // questionId -> score (1-4)
+  userInfo: UserInfo | null;
   onReset: () => void;
   lang: Lang;
 }
 
-export default function ResultSection({ answers, onReset, lang }: ResultSectionProps) {
+export default function ResultSection({ answers, userInfo, onReset, lang }: ResultSectionProps) {
   const t = TRANSLATIONS[lang];
 
   // Calculate scores
@@ -163,7 +168,7 @@ export default function ResultSection({ answers, onReset, lang }: ResultSectionP
           </div>
         </div>
 
-          {/* Dashboard statistics showcase */}
+        {/* Dashboard statistics showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2">
           
           {/* Circular SVG Dial Gauge */}

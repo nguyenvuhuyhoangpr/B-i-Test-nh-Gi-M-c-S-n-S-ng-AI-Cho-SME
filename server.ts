@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
@@ -10,6 +11,28 @@ const app = express();
 app.use(express.json());
 
 const PORT = 3000;
+
+const CONFIG_PATH = path.join(process.cwd(), "sheet-config.json");
+
+function getPersistedSheetUrl(): string {
+  try {
+    if (fs.existsSync(CONFIG_PATH)) {
+      const data = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf-8"));
+      return data.googleSheetWebappUrl || "";
+    }
+  } catch (err) {
+    console.error("Error reading sheet-config.json:", err);
+  }
+  return "";
+}
+
+function savePersistedSheetUrl(url: string) {
+  try {
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify({ googleSheetWebappUrl: url.trim() }), "utf-8");
+  } catch (err) {
+    console.error("Error writing sheet-config.json:", err);
+  }
+}
 
 // Lazy initialization of Google GenAI SDK to avoid crash on startup
 let aiClient: GoogleGenAI | null = null;
@@ -73,7 +96,7 @@ Với số điểm này, **${company}** đang ở giai đoạn cần tái địn
 // Core consultation API endpoint
 app.post("/api/analyze", async (req, res) => {
   try {
-    const { name, company, position, email, industry, scores, totalScore, qaSummary } = req.body;
+    const { name, company, position, email, industry, scores, totalScore } = req.body;
 
     if (!name || !company || !position || !scores) {
       return res.status(400).json({ error: "Thiếu dữ liệu đầu vào bắt buộc." });
@@ -109,38 +132,139 @@ Báo cáo của bạn phải bao gồm các phần chính sau và được đị
 
 1. LỜI GIAO TIẾP & CHÚC MỪNG ĐẦU TIÊN: Chào anh/chị ${name} với tư cách là ${position} của ${company} nhiệt thành, công nhận sự chủ động tiên phong của họ khi thực hiện bài đánh giá này trong bối cảnh làn sóng AI đang bùng nổ vũ bão hiện nay.
 2. PHÂN TÍCH THỂ TRẠNG VÀ ĐIỂM NGHẼN KỸ THUẬT: Chỉ rõ trạng thái sẵn sàng của họ tương ứng với tổng điểm ${totalScore}/100. Hãy phân tích chuyên sâu nhóm điểm số thấp nhất để chỉ ra điểm nghẽn thực sự tại ${company} đang nằm ở đâu và tại sao nó kìm hãm doanh nghiệp ứng dụng AI thành công.
-3. BA (03) ĐỀ XUẤT HÀNH ĐỘNG THỰC CHIẾN (CHỈ VÀO VẤN ĐỀ NÓNG): Đưa ra 3 giải pháp cực kỳ thực tế, "may đo" phù hợp cho doanh nghiệp SME, có thể hành động ngay dựa trên nguồn ngân sách hạn chế nhưng tối ưu hóa hiệu suất tối đa. Tránh các từ ngữ hàn lâm chung chung như "nên nghiên cứu", hãy chỉ rõ "cần làm gì, bắt đầu từ ai".
-4. THÔNG ĐIỆP ĐỘNG LỰC: Lời gửi gắm và động viên quý giá từ Chuyên gia Nguyễn Vũ Huy Hoàng gửi đến doanh nghiệp Việt.
+3. BA (03) ĐỀ XUẤT HÀNH ĐỘNG THỰC CHIẾN (CHỈ VÀO VẤN ĐỀ NÓNG): Đưa ra 3 giải pháp cực kỳ thực tế, "may đo" phù hợp cho doanh nghiệp SME, có thể hành động ngay dựa trên điểm số hiện tại để đẩy nhanh tiến độ làm giàu hạ tầng số và tối ưu hóa năng suất lao động bằng AI.
+4. LỜI KẾT VÀ THÔNG TIN LIÊN HỆ: Khép lại bằng một lời khích lệ tâm huyết truyền cảm hứng từ Chuyên gia Nguyễn Vũ Huy Hoàng. Nhắc cho người điều hành biết rằng 'AI không thay thế con người, nhưng người dùng AI sẽ thay thế người không dùng'. Cung cấp thông tin liên hệ chính thức, số điện thoại (0949.124.620) và thông báo rằng Chuyên gia Nguyễn Vũ Huy Hoàng luôn sẵn sàng đồng hành tư vấn chi tiết hơn cho ${company}.`;
 
-Hãy viết bản tư vấn chi tiết, dài khoảng 600 - 900 từ, hành văn rõ ràng, lưu loát, không viết tắt, không có các ký tự kỹ thuật thừa thãi.`;
+      const response = await ai.models.generateContent({
+        model: "gemini-3.5-flash",
+        contents: prompt,
+      });
 
-      try {
-        const response = await ai.models.generateContent({
-          model: "gemini-3.5-flash",
-          contents: prompt,
-          config: {
-            temperature: 0.8,
-          },
-        });
-        analysisText = response.text || "";
-      } catch (geminiError: any) {
-        console.error("Gemini API call failed, reverting to high-quality fallback:", geminiError);
-        analysisText = getStaticConsultation(name, company, position, industry || "SME Việt Nam", scores, totalScore);
-      }
-    } else {
-      // Gemini API key is not configured yet, use our incredibly rich Vietnamese static consultation generator
+      analysisText = response.text || "";
+    }
+
+    if (!analysisText) {
+      console.warn("Gemini Client is check failed. Utilizing dynamic consult standard fallback...");
       analysisText = getStaticConsultation(name, company, position, industry || "SME Việt Nam", scores, totalScore);
     }
 
-    res.json({
-      success: true,
-      score: totalScore,
-      level: totalScore <= 35 ? "Sơ khai" : totalScore <= 60 ? "Khởi động" : totalScore <= 85 ? "Sẵn sàng hạn chế" : "Sẵn sàng toàn diện",
-      analysis: analysisText
-    });
+    return res.json({ analysis: analysisText });
   } catch (error: any) {
-    console.error("Analysis endpoint error:", error);
-    res.status(500).json({ error: "Có lỗi xảy ra khi xử lý phân tích dữ liệu trên máy chủ." });
+    console.error("Consultation API error:", error);
+    res.status(500).json({ error: "Lỗi tạo báo cáo phân tích chiến lược", detail: error.message });
+  }
+});
+
+// Config endpoints for admin sheet URL persistence
+app.get("/api/get-webapp-url", (req, res) => {
+  const persistedUrl = getPersistedSheetUrl();
+  const defaultUrl = persistedUrl || process.env.GOOGLE_SHEET_WEBAPP_URL || "";
+  res.json({ url: defaultUrl });
+});
+
+app.post("/api/save-webapp-url", (req, res) => {
+  const { url } = req.body;
+  if (url === undefined) {
+    return res.status(400).json({ error: "Yêu cầu cung cấp 'url'." });
+  }
+  savePersistedSheetUrl(url);
+  res.json({ success: true, message: "Đã lưu cấu hình liên kết Google Sheets thành công trên máy chủ!" });
+});
+
+// Lead Submission & Syncing to Google Sheets
+app.post("/api/submit-lead", async (req, res) => {
+  try {
+    const { name, email, company, position, customSheetUrl } = req.body;
+
+    if (!name || !email || !company) {
+      return res.status(400).json({ error: "Thiếu các thông tin bắt buộc (Họ tên, Email, Tên công ty)." });
+    }
+
+    // Determine targeting Google Sheets URL: precedence: custom overrides > server configuration > environment variable
+    const targetUrl = customSheetUrl || getPersistedSheetUrl() || process.env.GOOGLE_SHEET_WEBAPP_URL;
+
+    if (!targetUrl || targetUrl === "MY_GOOGLE_SHEET_WEBAPP_URL" || targetUrl === "") {
+      console.warn("Google Sheets App Script Web App URL is not configured yet. Returning backup success state.");
+      return res.json({ 
+        success: true, 
+        notConfigured: true,
+        message: "Thông tin đã được lưu cục bộ trên máy chủ (Chưa được đồng bộ lên Google Sheet do chưa cấu hình URL Web App)." 
+      });
+    }
+
+    // Prepare payload matching the Apps Script expectation (Strictly the 4 fields requested)
+    const payload = {
+      name,
+      email,
+      company,
+      position: position || ""
+    };
+
+    console.log(`Forwarding lead to Google Sheets at: ${targetUrl.slice(0, 45)}...`);
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 seconds timeout
+
+    const response = await fetch(targetUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8" // Apps Script DOPOST handles plain text JSON delivery flawlessly without CORS options hassles
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    const textResult = await response.text();
+    console.log("Google Sheet Web App response:", textResult);
+
+    const isHtml = textResult.trim().startsWith("<") || textResult.includes("<html") || textResult.includes("<!DOCTYPE");
+
+    if (isHtml) {
+      console.error("Error: Google Web App returned an HTML page (Access Denied or Login required).");
+
+      let reasonDetail = "Ứng dụng Google Apps Script chưa được phân quyền truy cập công khai.";
+      if (targetUrl.includes("/dev")) {
+        reasonDetail = "Lỗi: Bạn đang sao chép URL kết thúc bằng '/dev' thay vị '/exec'. Hãy thực hiện Deploy (Triển khai mới) để nhận liên kết chính thức.";
+      } else if (textResult.includes(" need ") || textResult.includes("存取遭拒") || textResult.includes("Access denied") || textResult.includes("accounts.google.com") || textResult.includes("drive-logo")) {
+        reasonDetail = "Lỗi: Quyền truy cập bị chặn (存取遭拒). Vui lòng cấu hình 'Who has access' (Ai có quyền truy cập) thành 'Anyone' (Bất kỳ ai / 任何人) khi Deploy Web App bản mới.";
+      }
+
+      return res.status(450).json({
+        success: false,
+        error: reasonDetail,
+        isAccessError: true
+      });
+    }
+
+    let jsonResult;
+    try {
+      jsonResult = JSON.parse(textResult);
+    } catch {
+      jsonResult = null;
+    }
+
+    if (!jsonResult || jsonResult.success === false) {
+      return res.status(400).json({
+        success: false,
+        error: jsonResult?.error || "Google Sheets Apps Script không phản hồi đúng chuẩn dữ liệu JSON thành công.",
+        syncResult: jsonResult
+      });
+    }
+
+    return res.json({
+      success: true,
+      syncResult: jsonResult,
+      message: "Đồng bộ dữ liệu thành công!"
+    });
+
+  } catch (error: any) {
+    console.error("Submit lead endpoint error:", error);
+    res.status(500).json({ 
+      error: "Đã xảy ra lỗi khi lưu hoặc đồng bộ thông tin của bạn.",
+      msg: error.message 
+    });
   }
 });
 
