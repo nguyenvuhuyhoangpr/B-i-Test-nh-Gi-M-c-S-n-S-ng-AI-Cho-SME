@@ -30,12 +30,14 @@ interface UserInfoSectionProps {
 export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectionProps) {
   const t = TRANSLATIONS[lang];
 
-  // Load fallback custom Web App URL from localStorage to allow direct preview/production configuration
+  // Load fallback custom Web App URL from localStorage or VITE_ environment variable to allow direct Vercel deployment support
   const [customSheetUrl, setCustomSheetUrl] = useState(() => {
     try {
-      return localStorage.getItem("google-sheet-webapp-url") || "";
+      const metaEnv = (import.meta as any).env;
+      return localStorage.getItem("google-sheet-webapp-url") || (metaEnv ? metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL : "") || "";
     } catch {
-      return "";
+      const metaEnv = (import.meta as any).env;
+      return metaEnv ? metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL || "" : "";
     }
   });
 
@@ -173,24 +175,52 @@ export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectio
         console.warn("localStorage sync error", err);
       }
 
-      // Submit lead silently in the background
+      // Submit lead in background with client-to-sheets fallback (Vercel static support)
+      const payload = {
+        name: form.name,
+        email: form.email,
+        company: form.company,
+        position: form.position
+      };
+
       fetch("/api/submit-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          company: form.company,
-          position: form.position,
+          ...payload,
           customSheetUrl: customSheetUrl.trim()
         })
       })
-      .then(res => res.json())
-      .then(data => {
-        console.log("Background lead sync response received:", data);
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(`Server returned status ${res.status}`);
+        }
+        return res.json();
       })
-      .catch(err => {
-        console.warn("Background lead sync network error:", err);
+      .then(data => {
+        console.log("Background lead sync response received (backend):", data);
+      })
+      .catch((err) => {
+        console.warn("Server lead sync failed. Attempting direct browser-to-Google Sheets sync (Vercel static support)...", err);
+        
+        // If the server backend fails (e.g., 404 on Vercel static), and we have a valid macro Apps Script URL
+        const targetUrl = customSheetUrl.trim();
+        if (targetUrl && targetUrl.includes("script.google.com")) {
+          fetch(targetUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+          })
+          .then(async (clientRes) => {
+            const clientText = await clientRes.text();
+            console.log("Direct client-to-sheets sync response received:", clientText);
+          })
+          .catch((clientErr) => {
+            console.error("Direct browser-to-sheets sync failed too:", clientErr);
+          });
+        }
       });
 
       onNext(form);
