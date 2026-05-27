@@ -117,7 +117,7 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     subtitle: "Hệ thống đánh giá năng lực sẵn sàng AI",
     authorLabel: "Chuyên gia đồng hành",
     authorName: "Nguyễn Vũ Huy Hoàng",
-    academicBody: "VIỆN ĐÀO TẠO & CHUYỂN GIAO CÔNG NGHỆ",
+    academicBody: "HỌC VIỆN LÃNH ĐẠO BRAINUP",
     navHome: "Trang chủ",
     navTheme: "Giao diện",
     navLang: "Ngôn ngữ",
@@ -194,10 +194,10 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     levelBreakthroughDesc: "Chúc mừng! Doanh nghiệp sở hữu nền tảng vận hành tự động lý tưởng, dữ liệu cập nhật API liên tục, văn hóa nỗ lực bứt phá công nghệ sâu rộng. Đây là thời cơ vàng để doanh nghiệp nhúng AI trực tiếp làm tài sản cạnh tranh độc quyền toàn diện.",
 
     expertFooterContactLabel: "HOTLINE TƯ VẤN TRỰC TIẾP",
-    expertFooterSubtitle: "Chuyên gia đào tạo AI hàng đầu cho doanh nghiệp & lãnh đạo",
-    expertCredential1: "Nhà sáng lập Viện Đào tạo & Chuyển giao công nghệ tiên tiến.",
-    expertCredential2: "Đã tư vấn & nâng cấp tư duy Prompt/AI tích hợp cho +2,000 nhân sự các cấp.",
-    expertCredential3: "Chuyên gia phát triển ứng dụng AI thực chiến giúp cắt giảm 50% thời gian vận hành.",
+    expertFooterSubtitle: "Chuyên gia đào tạo AI và Chuyển đổi số",
+    expertCredential1: "Phó viện trưởng Viện KHCN Khởi nghiệp sáng tạo – Hội giáo dục TP.HCM",
+    expertCredential2: "Phó viện trưởng Viện đào tạo & chuyển giao công nghệ - Bộ Khoa học Công nghệ",
+    expertCredential3: "Giám đốc chương trình đào tạo AI & Chuyển đổi số Viện đào tạo doanh nghiệp ACC",
     expertCopyright: "Bản quyền công cụ đánh giá và mô hình giải pháp AI toàn diện thuộc về Chuyên gia Nguyễn Vũ Huy Hoàng. Chương trình được thiết kế nhằm hỗ trợ nâng tầm năng lực cạnh tranh bền vững cho cộng đồng SME Việt Nam.",
 
     // New section 2 info
@@ -227,7 +227,7 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     subtitle: "AI Readiness Assessment Portal",
     authorLabel: "Accredited Expert",
     authorName: "Nguyen Vu Huy Hoang",
-    academicBody: "INSTITUTE OF DIGITAL EDUCATION & TECHNOLOGY TRANSFER",
+    academicBody: "BRAINUP LEADERSHIP ACADEMY",
     navHome: "Home",
     navTheme: "Theme",
     navLang: "Language",
@@ -304,10 +304,10 @@ export const TRANSLATIONS: Record<Lang, TranslationSet> = {
     levelBreakthroughDesc: "Congratulations! The enterprise exhibits state-of-the-art automatic digital workflows, real-time API syncs, and a highly literate technical culture. You are positioned to leverage proprietary custom AI Agents as an exclusive economic moat.",
 
     expertFooterContactLabel: "EXPERT ADVISORY LINE",
-    expertFooterSubtitle: "Premier Corporate AI Coach & Digital Mentor",
-    expertCredential1: "Founder of the modern Institute of Digital Education & Technology Transfer.",
-    expertCredential2: "Trained and mentored over 2,000 corporate staff & high-level decision makers in Prompt Engineering and AI.",
-    expertCredential3: "Designer of custom generative work environments, saving enterprises and teams up to 50% manual hours.",
+    expertFooterSubtitle: "AI & Digital Transformation Training Expert",
+    expertCredential1: "Vice President, Institute of Innovative Startup S&T - HCMC Education Association",
+    expertCredential2: "Vice President, Institute of Education & Technology Transfer - Ministry of S&T",
+    expertCredential3: "Director of AI & Digital Transformation, ACC Enterprise Training Institute",
     expertCopyright: "All assessment methodologies, core competency indexes, and advisory reports are copyrighted by Trainer Nguyen Vu Huy Hoang. This program is created to boost the sustainable advantage of SMEs.",
 
     // New section 2 info

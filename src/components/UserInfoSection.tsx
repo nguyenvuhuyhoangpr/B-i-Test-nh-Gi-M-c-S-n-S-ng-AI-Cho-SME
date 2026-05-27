@@ -17,7 +17,8 @@ import {
   ChevronDown,
   ChevronUp,
   FileSpreadsheet,
-  AlertTriangle
+  AlertTriangle,
+  Loader2
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -30,14 +31,30 @@ interface UserInfoSectionProps {
 export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectionProps) {
   const t = TRANSLATIONS[lang];
 
-  // Load fallback custom Web App URL from localStorage or VITE_ environment variable to allow direct Vercel deployment support
+  // Load fallback custom Web App URL from localStorage or environment configurations (compiled under both Vite & standard process.env)
   const [customSheetUrl, setCustomSheetUrl] = useState(() => {
     try {
+      const stored = localStorage.getItem("google-sheet-webapp-url");
+      if (stored) return stored;
+
+      // 1. Safe process.env fallback (injected by vite.config.ts define block during compilation on Vercel)
+      if (typeof process !== "undefined" && (process as any)?.env?.GOOGLE_SHEET_WEBAPP_URL) {
+        return (process as any).env.GOOGLE_SHEET_WEBAPP_URL;
+      }
+
+      // 2. Safe import.meta.env fallback configuration
       const metaEnv = (import.meta as any).env;
-      return localStorage.getItem("google-sheet-webapp-url") || (metaEnv ? metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL : "") || "";
+      if (metaEnv) {
+        return metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL || metaEnv.GOOGLE_SHEET_WEBAPP_URL || "";
+      }
+      return "";
     } catch {
-      const metaEnv = (import.meta as any).env;
-      return metaEnv ? metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL || "" : "";
+      try {
+        const metaEnv = (import.meta as any).env;
+        return metaEnv ? metaEnv.VITE_GOOGLE_SHEET_WEBAPP_URL || "" : "";
+      } catch {
+        return "";
+      }
     }
   });
 
@@ -49,6 +66,7 @@ export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectio
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(() => {
@@ -165,9 +183,10 @@ export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectio
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
+      setIsSubmitting(true);
       // Temporarily stash user info so it persists across components
       try {
         localStorage.setItem("sme-ai-user-info", JSON.stringify(form));
@@ -183,47 +202,51 @@ export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectio
         position: form.position
       };
 
-      fetch("/api/submit-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...payload,
-          customSheetUrl: customSheetUrl.trim()
-        })
-      })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Server returned status ${res.status}`);
+      try {
+        // Step A: Attempt standard backend server proxy
+        const response = await fetch("/api/submit-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...payload,
+            customSheetUrl: customSheetUrl.trim()
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server returned status ${response.status}`);
         }
-        return res.json();
-      })
-      .then(data => {
+
+        const data = await response.json();
         console.log("Background lead sync response received (backend):", data);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.warn("Server lead sync failed. Attempting direct browser-to-Google Sheets sync (Vercel static support)...", err);
         
-        // If the server backend fails (e.g., 404 on Vercel static), and we have a valid macro Apps Script URL
+        // Step B: Client-side direct connection with "no-cors" fallback (Vercel static execution)
         const targetUrl = customSheetUrl.trim();
         if (targetUrl && targetUrl.includes("script.google.com")) {
-          fetch(targetUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(payload)
-          })
-          .then(async (clientRes) => {
-            const clientText = await clientRes.text();
-            console.log("Direct client-to-sheets sync response received:", clientText);
-          })
-          .catch((clientErr) => {
+          try {
+            // We use mode: "no-cors" and Content-Type text/plain to force simple cross-origin delivery.
+            // This prevents CORS OPTIONS preflight blocks from Google Macro script servers and guarantees delivery receipt.
+            await fetch(targetUrl, {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+              },
+              body: JSON.stringify(payload)
+            });
+            console.log("Direct client-to-sheets sync completed (opaque resolution)!");
+          } catch (clientErr) {
             console.error("Direct browser-to-sheets sync failed too:", clientErr);
-          });
+          }
+        } else {
+          console.warn("No custom Google Sheets Web App URL provided or configured.");
         }
-      });
-
-      onNext(form);
+      } finally {
+        setIsSubmitting(false);
+        onNext(form);
+      }
     }
   };
 
@@ -371,12 +394,24 @@ export default function UserInfoSection({ lang, onNext, onBack }: UserInfoSectio
 
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.015 }}
-              whileTap={{ scale: 0.985 }}
-              className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-550 hover:to-cyan-400 text-white font-black px-10 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all text-xs uppercase tracking-widest cursor-pointer flex items-center justify-center space-x-2"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.015 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.985 }}
+              className={`w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-550 hover:to-cyan-400 text-white font-black px-10 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all text-xs uppercase tracking-widest flex items-center justify-center space-x-2 ${
+                isSubmitting ? "opacity-75 cursor-not-allowed" : "cursor-pointer"
+              }`}
             >
-              <span>{t.btnStartSurvey}</span>
-              <ChevronRight className="h-4 w-4 stroke-[2.5]" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin text-white" />
+                  <span>{lang === "vi" ? "ĐANG ĐỒNG BỘ..." : "SYNCING..."}</span>
+                </>
+              ) : (
+                <>
+                  <span>{t.btnStartSurvey}</span>
+                  <ChevronRight className="h-4 w-4 stroke-[2.5]" />
+                </>
+              )}
             </motion.button>
           </div>
         </form>

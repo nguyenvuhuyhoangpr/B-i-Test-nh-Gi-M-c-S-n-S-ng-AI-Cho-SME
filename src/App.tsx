@@ -5,7 +5,7 @@ import UserInfoSection from "./components/UserInfoSection";
 import Questionnaire from "./components/Questionnaire";
 import ResultSection from "./components/ResultSection";
 import Footer from "./components/Footer";
-import { BrainCircuit, GraduationCap, Sun, Moon, Languages } from "lucide-react";
+import { GraduationCap, Sun, Moon, Languages } from "lucide-react";
 import { UserInfo } from "./types";
 
 export default function App() {
@@ -90,11 +90,8 @@ export default function App() {
           
           {/* Logo & Institute Context */}
           <div className="flex items-center space-x-3 text-center md:text-left cursor-pointer" onClick={handleReset}>
-            <div className="bg-gradient-to-br from-indigo-500 to-cyan-400 text-white p-2.5 rounded-xl shadow-lg">
-              <BrainCircuit className="h-6 w-6 stroke-[2]" />
-            </div>
             <div>
-              <h2 className="text-xxs font-mono font-black text-indigo-600 dark:text-cyan-400 tracking-wider leading-none uppercase">{t.academicBody}</h2>
+              <h2 className="text-xxs font-mono font-black text-indigo-700 dark:text-cyan-400 tracking-wider leading-none uppercase mb-0.5">{t.academicBody}</h2>
               <span className="text-base sm:text-lg font-black font-display text-slate-900 dark:text-white tracking-tight leading-normal">
                 {t.subtitle}
               </span>
